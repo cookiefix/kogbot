@@ -1,0 +1,47 @@
+[{"title": 'Ivan Bratko / Domen Šoberl, Umetna inteligenca 1',
+	            "start": (10, 0),
+	            "end": (13, 0),
+	            "day": 0
+				}
+	,
+	        {"title": 'Zvezdan Pirtošek / Tjaša Mlinarič, Kognitivna nevroznanost 1',
+	            "start": (14, 0),
+	            "end": (17, 25),
+	            "day": 0
+	        }
+	,
+	        {"title": 'Olga Markič, prostori PEF, predavanja, B2 Uvod v kognitivno znanost 1',
+	            "start": (11, 20),
+	            "end": (12, 50),
+	            "day": 1
+	        }
+	,
+	        {"title": 'Janez Demšar, prostori PEF, Programiranje - KZ 5 KT',
+	            "start": (13, 45),
+	            "end": (17, 0),
+	            "day": 1
+	        }
+	,
+	        {"title": 'Urban Kordeš / Jure Bon / Jaša Černe, B2 Uvod v raziskovanje 1',
+	            "start": (14, 30),
+	            "end": (17, 40),
+	            "day": 2   
+	        }
+	,
+	        {"title": 'Tatjana Marvin, Uvod v jezikoslovje',
+	            "start": (9, 0),
+	            "end": (12, 0),
+	            "day": 3
+	        }
+	,
+	        {"title": 'Toma Strle / Jaša Černe, vaje, B2 Uvod v kognitivno znanost 1',
+	            "start": (13, 0),
+	            "end": (14, 30),
+	            "day": 3
+	        }
+	,
+	        {"title": 'Gregor Sočan, Uvod v statistiko',
+	            "start": (16, 0),
+	            "end": (19, 30),
+	            "day": 3   
+	        }]

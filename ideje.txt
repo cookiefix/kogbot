@@ -1,0 +1,17 @@
+from fbchat import Client
+from fbchat.models import Message
+---samo za avtomacijo na user level ampak lahko prids notr z user creds
+
+
+PAGE_ID = ""
+APP_ID = "1057418941493333"
+PAGE_ACCESS_TOKEN = ""
+APP_SECRET = "2b421177538134f767e394cda1a09bcf"
+
+
+### IMPROVEMENT
+vsako minuto 1x pogleda ce je ze v next lesson
+ce se ni ok pol nc (next lesson se ne spremeni)
+ce je start == ali je med start pa end pol zamenja next lesson na next in line v {ure v dnevu}[ura objecti] (nek counter mogoce kr count.next)
+tko ne racuna vsakic ko nekdo napise ampak racuna 1x na minuto, vraca na stevilo requestou
+
