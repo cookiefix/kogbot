@@ -1,6 +1,7 @@
 # TODO fking add .predmet v Ura, in .json database za userje da si zberejo kaj nimajoimport fbchat
 # TODO user_database mapa: notr nrdi file ko spozna userja prvič; notr pise preference za predmete in reminderje ce je treba
-# se en ALL_USERS file v mapi ki pa je za pošiljanje vsem userjem
+# TODO se en ALL_USERS file v mapi ki pa je za pošiljanje vsem userjem
+# TODO sms 6 dni pred izpiti + kolokviji
 
 
 from Projects.kogbot.urnik import URNIK, WEEKDAYS, WEEKDAYS_R, get_day_agenda, get_time, get_weekday, next_lecture, today_no_more
