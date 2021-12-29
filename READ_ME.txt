@@ -1,6 +1,7 @@
 HELOUS THIS IS NOOB PROGRAMER BROKOLI
 ok so basicaly:
 
+- uses fbchat package!!!
 - app.py is the brains, samo ta file se actually runna
 - ostali .py se ukvarjajo s čemer piše v imenu
 - editing version je backup folder kjer ponavad editam file predn runnam na botu in jih pol dam notr starejso verzijo
