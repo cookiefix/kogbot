@@ -1,4 +1,4 @@
-31. 12. 2021
+IZPITI_P = """31. 12. 2021
 - Prijava na izmenjavo
 
 4. 1. 2022
@@ -52,4 +52,4 @@
 - UKZ izpit
 
 10. 2. 2022
-- UR izpit
+- UR izpit"""

@@ -1,7 +1,3 @@
-#CHANGE LOG
-#revision = 1
-#j = _util.parse_json(message.payload.decode("ISO 8859-1"))
-
 # TODO fking add .predmet v Ura, in .json database za userje da si zberejo kaj nimajoimport fbchat
 # TODO user_database mapa: notr nrdi file ko spozna userja prvič; notr pise preference za predmete in reminderje ce je treba
 # se en ALL_USERS file v mapi ki pa je za pošiljanje vsem userjem
@@ -10,12 +6,16 @@
 from Projects.kogbot.urnik import URNIK, WEEKDAYS, WEEKDAYS_R, get_day_agenda, get_time, get_weekday, next_lecture, today_no_more
 import urnik
 import fbchat
+from izpiti import IZPITI_P
+import izpiti
 
 USERNAME = "kogbot@protonmail.com"
 PASSWORD = "KogBotTopDown2021"
-HELP_LIST = {0:"POMOČ UPORABNIKOM\nČe kej ne prime probi poslat se enkrat haha.\nBot NE uporablja nobenih posebnih znakov ( \"ali_ ), SAMO crke in presledki.\nVse funkcije:\nurnik | urnik dan\nVelike/male crke nimajo vpliva.\nZa več info napiši npr:\n\"help urnik dan\"",
+HELP_LIST = {0:"POMOČ UPORABNIKOM\nČe kej ne prime probi poslat se enkrat haha.\nBot NE uporablja nobenih posebnih znakov ( \"ali_ ), SAMO crke in presledki.\nVse funkcije:\nurnik | urnik dan | izpiti\nVelike/male crke nimajo vpliva.\nZa več info napiši npr:\n\"help urnik dan\"",
              "urnik": "Funkcija URNIK:\nPreprosto pošlješ besedo urnik.\nPove naslednje predavanje oz. kaj trenutno poteka. Če danes predavanj ni več pove kdaj je nasledni dan z predavanji.",
-             "urnik dan": "Funkcija URNIK DAN\nPošješ: urnik dan\nNamesto dan napiši dan brez šumnikov.\nPove celoten urnik izbranega dneva oz. če je dan prazen."}
+             "urnik dan": "Funkcija URNIK DAN\nPošješ: urnik dan\nNamesto dan napiši dan brez šumnikov.\nPove celoten urnik izbranega dneva oz. če je dan prazen.",
+             "izpiti": "Funkcija IZPITI\nPošješ: izpiti\nTrenutno le pove vse obveznosti, ki jih imamo za oddat. Izboljšave sledijo..."}
+
 urnik_r = {dan:[urnik.Ura(ura["start"],ura["end"],ura["day"],ura["title"]) for ura in URNIK if ura["day"] == dan] for dan in WEEKDAYS}
 
 class OnMessClient(fbchat.Client):
@@ -42,6 +42,9 @@ class OnMessClient(fbchat.Client):
         # nik je car
         elif "kdo" in text and "car" in text:
             self.send(fbchat.Message(text="NIK je CAR B) !"), thread_id, thread_type)
+        # izpiti beta
+        elif "izpiti" in text:
+            self.send(fbchat.Message(text=IZPITI_P), thread_id, thread_type)
         
 
 client = OnMessClient(USERNAME, PASSWORD)
