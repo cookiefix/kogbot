@@ -44,7 +44,7 @@ class OnMessClient(fbchat.Client):
         elif "kdo" in text and "car" in text:
             self.send(fbchat.Message(text="NIK je CAR B) !"), thread_id, thread_type)
         # izpiti beta
-        elif "izpiti" in text:
+        elif "izpiti" == text:
             self.send(fbchat.Message(text=IZPITI_P), thread_id, thread_type)
         
 
