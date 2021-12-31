@@ -137,8 +137,10 @@ def calc_time_till(current, target):
 
 def today_no_more(urnik):
     tmrw = get_weekday() + 1
-    if tmrw >= 6:
+    if tmrw >= 7:
         tmrw = 0
     while urnik[tmrw] == []:
             tmrw += 1
+            if tmrw >= 7:
+                tmrw = 0
     return f"Naslednje predavanje je v {WEEKDAYS[tmrw].upper()}!\n{get_day_agenda(urnik, tmrw)[0].msg()}\n"
