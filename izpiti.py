@@ -1,7 +1,4 @@
-IZPITI_P = """31. 12. 2021
-- Prijava na izmenjavo
-
-4. 1. 2022
+IZPITI_P = """4. 1. 2022
 - PROG naloga za oceno
 
 10. 1. 2022
