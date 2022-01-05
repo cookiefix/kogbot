@@ -4,7 +4,7 @@
 # TODO sms 6 dni pred izpiti + kolokviji
 
 
-from Projects.kogbot.urnik import URNIK, WEEKDAYS, WEEKDAYS_R, get_day_agenda, get_time, get_weekday, next_lecture, today_no_more
+from urnik import URNIK, WEEKDAYS, WEEKDAYS_R, get_day_agenda, get_time, get_weekday, next_lecture, today_no_more
 import urnik
 import fbchat
 from izpiti import IZPITI_P
@@ -26,7 +26,7 @@ class OnMessClient(fbchat.Client):
         # command urnik
         if text == "urnik":
             self.send(fbchat.Message(text=urnik.next_lecture(urnik_r)), thread_id, thread_type)
-        #command urnik <dan>
+        # command urnik <dan>
         elif "urnik" in text and text.split(" ")[1] in WEEKDAYS_R.keys():
             day_i = WEEKDAYS_R[text.split(" ")[1]]
             if urnik_r[day_i] == []:
