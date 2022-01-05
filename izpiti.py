@@ -1,62 +1,46 @@
-IZPITI_P = """4. 1. 2022
-- PROG naloga za oceno
+from datetime import date
 
-10. 1. 2022
-- UKZ oddaja seminarske
-- UR poročilo o raziskovalnem načrtu
-- UI domača naloga
+IZPITI_P = {(4,1): ["PROG naloga za oceno"],
 
-11. 1. 2022
-- UKZ predstavitve seminarske
+(10,1): ["UKZ oddaja seminarske", "UR poročilo o raziskovalnem načrtu", "UI domača naloga"],
 
-13. 1. 2022
-- UKZ predstavitve seminarske
+(11,1): ["UKZ predstavitve seminarske"],
 
-17. 1. 2022
-- PROG izpit
-- UI izpit (?)
+(13,1): ["UKZ predstavitve seminarske"],
 
-19. 1 2022
-- NEVRA izpit
+(17,1): ["PROG izpit"],
 
-21. 1. 2022
-- UKZ izpit
+(19,1): ["NEVRA izpit"],
 
-24. 1 .2022
-- UR izpit
-- UR končno poročilo
+(21,1): ["UKZ izpit"],
 
-25. 1. 2022
-- STAT izpit
-- UI seminarska
+(24,1): ["UR izpit", "UR končno poročilo"],
 
-26. 1. 2021 
-- Prijava na Erasmus+ izmenjavo
+(25,1): ["STAT izpit", "UI seminarska"],
 
-27. 1. 2022
-- UI izpit
+(26,1): ["Prijava na Erasmus+ izmenjavo"],
 
-1. 2. 2022
-- PROG izpit
+(27,1): ["UI izpit"],
 
-3. 2. 2022
-- NEVRA izpit
+(1,2): ["PROG izpit"],
 
-4. 2. 2022
-- STAT izpit
+(3,2): ["NEVRA izpit"],
 
-7. 2. 2022
-- UKZ izpit
+(4,2): ["STAT izpit"],
 
-10. 2. 2022
-- UR izpit"""
+(7,2): ["UKZ izpit"],
+
+(10,2): ["UR izpit"]}
 
 # TODO class za obveznost, te se doda v dict k jih uredi po datumih lahko ma tut vsaka obveznost datum
 
-class Obveznost():
-    def __init__(self, ime, datum):
-        self.ime = ime
+class DatumObv():
+    def __init__(self, obv, datum):
+        self.obveznosti = obv
         self.datum = datum
 
+def render_obv(slovar, dan):
+    pass
 
-        
+def get_date():
+    return (date.today().day, date.today().month)
