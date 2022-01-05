@@ -44,3 +44,5 @@ def render_obv(slovar, dan):
 
 def get_date():
     return (date.today().day, date.today().month)
+
+print("test")
