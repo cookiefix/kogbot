@@ -19,6 +19,8 @@ HELP_LIST = {0:"POMOČ UPORABNIKOM\nČe kej ne prime probi poslat se enkrat haha
 
 urnik_r = {dan:[urnik.Ura(ura["start"],ura["end"],ura["day"],ura["title"]) for ura in URNIK if ura["day"] == dan] for dan in WEEKDAYS}
 
+obveznosti_r = {}
+
 class OnMessClient(fbchat.Client):
     def onMessage(self, mid, author_id, message_object, thread_id, thread_type, ts, metadata, msg, **kwargs):
         text = message_object.text.strip().lower()
@@ -52,7 +54,7 @@ client = OnMessClient(USERNAME, PASSWORD)
 
 client.listen()
 
-
+print("AAAAAAAAAAAAA")
 
 
 

@@ -57,6 +57,4 @@ class Obveznost():
     def __init__(self, ime, datum):
         self.ime = ime
         self.datum = datum
-
-
         
