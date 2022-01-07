@@ -12,14 +12,15 @@ import izpiti
 
 USERNAME = "kogbot@protonmail.com"
 PASSWORD = "KogBotTopDown2021"
-HELP_LIST = {0:"POMOČ UPORABNIKOM\nČe kej ne prime probi poslat se enkrat haha.\nBot NE uporablja nobenih posebnih znakov ( \"ali_ ), SAMO crke in presledki.\nVse funkcije:\nurnik | urnik dan | izpiti\nVelike/male crke nimajo vpliva.\nZa več info napiši npr:\n\"help urnik dan\"",
+HELP_LIST = {0:f"POMOČ UPORABNIKOM\nČe kej ne prime probi poslat se enkrat haha.\nBot NE uporablja nobenih posebnih znakov ( \"ali_ ), SAMO crke in presledki.\nVse funkcije:\nurnik | urnik dan | izpiti | izpiti next\nVelike/male crke nimajo vpliva.\nZa več info napiši npr:\n\"help urnik dan\"",
              "urnik": "Funkcija URNIK:\nPreprosto pošlješ besedo urnik.\nPove naslednje predavanje oz. kaj trenutno poteka. Če danes predavanj ni več pove kdaj je nasledni dan z predavanji.",
              "urnik dan": "Funkcija URNIK DAN\nPošješ: urnik dan\nNamesto dan napiši dan brez šumnikov.\nPove celoten urnik izbranega dneva oz. če je dan prazen.",
-             "izpiti": "Funkcija IZPITI\nPošješ: izpiti\nTrenutno le pove vse obveznosti, ki jih imamo za oddat. Izboljšave sledijo..."}
+             "izpiti": "Funkcija IZPITI\nPošješ: izpiti\nTrenutno pove vse obveznosti, ki jih imamo za oddat. Izboljšave sledijo...",
+             "izpiti next": "Funkcija IZPITI NEXT\nPošješ: izpiti next\nPove naslednji datum z obveznostmi, čez koliko dni bo in obveznosti, ki jih imamo za oddat/se učit."}
 
 urnik_r = {dan:[urnik.Ura(ura["start"],ura["end"],ura["day"],ura["title"]) for ura in URNIK if ura["day"] == dan] for dan in WEEKDAYS}
-
-datum_obv = {kk: [izpiti.DatumObv(k,o) for k,v in IZPITI_P.items() for o in v if k == kk] for kk in IZPITI_P.keys()}
+cur_date = izpiti.get_date()
+datum_obv = {k: izpiti.DatumObv(k,v) for k,v in IZPITI_P.items() if k[1] > cur_date[1] or (k[0] > cur_date[0] and k[1] == cur_date[1])}
 
 class OnMessClient(fbchat.Client):
     def onMessage(self, mid, author_id, message_object, thread_id, thread_type, ts, metadata, msg, **kwargs):
@@ -36,7 +37,7 @@ class OnMessClient(fbchat.Client):
             else:
                 t = "------\n".join([text.split(" ")[1].upper() + "\n"] + [u.msg() for u in urnik.get_day_agenda(urnik_r, day=day_i)])
             self.send(fbchat.Message(text=t), thread_id, thread_type)
-        # help
+        # command help
         elif "help" in text:
             if text == "help":
                 self.send(fbchat.Message(text=HELP_LIST[0]), thread_id, thread_type)
@@ -46,13 +47,19 @@ class OnMessClient(fbchat.Client):
         elif "kdo" in text and "car" in text:
             self.send(fbchat.Message(text="NIK je CAR B) !"), thread_id, thread_type)
         # izpiti beta
-        elif "izpiti" == text:
-            self.send(fbchat.Message(text=IZPITI_P), thread_id, thread_type)
-        
+        elif "izpiti" in text:
+            dan, mesec = izpiti.get_date()
+            vsi_izpiti = sorted([obvs for datum, obvs in datum_obv.items() if datum[1] > mesec or (datum[0] > dan and datum[1] == mesec)], key=lambda x: x.days_till())
+            if "izpiti" == text:
+                t = "\n".join(["IZPITI"]+[obvs.render_obv() for obvs in vsi_izpiti])
+                self.send(fbchat.Message(text=t), thread_id, thread_type)
+            # izpit beta modifiers
+            elif text.split(" ")[0] == "izpiti" and text.split(" ")[1] != "":
+                modifier = text.split(" ")[1]
+                t_mod = {"next": "\n".join([f"NEXT ČEZ {vsi_izpiti[0].days_till()} dni!\n{vsi_izpiti[0].render_obv()}"])}
+                self.send(fbchat.Message(text=t_mod[modifier]), thread_id, thread_type)
+
 
 client = OnMessClient(USERNAME, PASSWORD)
 
 client.listen()
-
-
-
