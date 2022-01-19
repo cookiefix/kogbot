@@ -27,10 +27,11 @@ class OnMessClient(fbchat.Client):
         text = message_object.text.strip().lower()
         
         # command urnik
-        if text == "urnik":
-            self.send(fbchat.Message(text=urnik.next_lecture(urnik_r)), thread_id, thread_type)
+        # DISABLED due to izpitno obdobje
+        # if text == "urnik":
+            # self.send(fbchat.Message(text=urnik.next_lecture(urnik_r)), thread_id, thread_type)
         # command urnik <dan>
-        elif "urnik" in text and text.split(" ")[1] in WEEKDAYS_R.keys():
+        if "urnik" in text and text != "urnik" and text.split(" ")[1] in WEEKDAYS_R.keys():
             day_i = WEEKDAYS_R[text.split(" ")[1]]
             if urnik_r[day_i] == []:
                 t = f"{WEEKDAYS[day_i].capitalize()} je FREJ :D !"
@@ -47,17 +48,24 @@ class OnMessClient(fbchat.Client):
         elif "kdo" in text and "car" in text:
             self.send(fbchat.Message(text="NIK je CAR B) !"), thread_id, thread_type)
         # izpiti beta
-        elif "izpiti" in text:
+        elif "izpiti" in text or "urnik" in text:
             dan, mesec = izpiti.get_date()
             vsi_izpiti = sorted([obvs for datum, obvs in datum_obv.items() if datum[1] > mesec or (datum[0] > dan and datum[1] == mesec)], key=lambda x: x.days_till())
             if "izpiti" == text:
                 t = "\n".join(["IZPITI"]+[obvs.render_obv() for obvs in vsi_izpiti])
                 self.send(fbchat.Message(text=t), thread_id, thread_type)
+            # DODANO ZA IZPITNO OBDOBJE
+            elif "urnik" == text:
+                modifier = "urnik"
+                t_mod = {"urnik": "\n".join([f"POTEKA IZPITNO OBDOBJE!\nPREDAVANJ NI!\n\nNEXT IZPIT ČEZ {vsi_izpiti[0].days_till()} dni!\n{vsi_izpiti[0].render_obv()}"])}
+                self.send(fbchat.Message(text=t_mod[modifier]), thread_id, thread_type)
             # izpit beta modifiers
-            elif text.split(" ")[0] == "izpiti" and text.split(" ")[1] != "":
+            elif text.split(" ")[0] == "izpiti" and text.split(" ")[1] != "" :
                 modifier = text.split(" ")[1]
                 t_mod = {"next": "\n".join([f"NEXT ČEZ {vsi_izpiti[0].days_till()} dni!\n{vsi_izpiti[0].render_obv()}"])}
                 self.send(fbchat.Message(text=t_mod[modifier]), thread_id, thread_type)
+            
+
 
 
 client = OnMessClient(USERNAME, PASSWORD)
