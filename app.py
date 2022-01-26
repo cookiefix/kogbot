@@ -26,7 +26,7 @@ class OnMessClient(fbchat.Client):
     def onMessage(self, mid, author_id, message_object, thread_id, thread_type, ts, metadata, msg, **kwargs):
         text = message_object.text.strip().lower()
         
-        # command urnik
+        # command urnikk
         # DISABLED due to izpitno obdobje
         # if text == "urnik":
             # self.send(fbchat.Message(text=urnik.next_lecture(urnik_r)), thread_id, thread_type)
